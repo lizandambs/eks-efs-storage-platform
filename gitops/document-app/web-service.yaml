@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: document-web-service
+  namespace: document-app
+  labels:
+    app: document-web
+spec:
+  type: ClusterIP
+
+  selector:
+    app: document-web
+
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP

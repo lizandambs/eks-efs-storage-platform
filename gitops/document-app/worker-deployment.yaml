@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: document-worker
+  namespace: document-app
+  labels:
+    app: document-worker
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: document-worker
+
+  template:
+    metadata:
+      labels:
+        app: document-worker
+
+    spec:
+      containers:
+        - name: document-worker
+
+          image: image: 411653575766.dkr.ecr.us-east-1.amazonaws.com/eks-efs-storage-dev-document-app:latest
+
+          command:
+            - python
+            - worker.py
+
+          volumeMounts:
+            - name: document-storage
+              mountPath: /app/uploads
+
+            - name: processed-storage
+              mountPath: /app/processed
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+      volumes:
+        - name: document-storage
+          persistentVolumeClaim:
+            claimName: document-storage
+
+        - name: processed-storage
+          persistentVolumeClaim:
+            claimName: document-storage
