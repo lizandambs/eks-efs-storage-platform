@@ -27,8 +27,6 @@ spec:
           volumeMounts:
             - name: document-storage
               mountPath: /app/uploads
-            - name: processed-storage
-              mountPath: /app/processed
           resources:
             requests:
               cpu: "100m"
@@ -52,6 +50,4 @@ spec:
         - name: document-storage
           persistentVolumeClaim:
             claimName: document-storage
-        - name: processed-storage
-          persistentVolumeClaim:
-            claimName: document-storage
+        

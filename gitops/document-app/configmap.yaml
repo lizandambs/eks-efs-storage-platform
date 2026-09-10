@@ -5,4 +5,4 @@ metadata:
   namespace: document-app
 data:
   UPLOAD_FOLDER: "/app/uploads"
-  PROCESSED_FOLDER: "/app/processed"
+  PROCESSED_FOLDER: "/app/uploads/processed"
