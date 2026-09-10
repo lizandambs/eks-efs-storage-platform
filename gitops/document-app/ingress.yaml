@@ -1,5 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
+
 metadata:
   name: document-app-ingress
   namespace: document-app
@@ -8,12 +9,13 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
     alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    argocd.argoproj.io/tracking-id: document-app:networking.k8s.io/Ingress:document-app/document-app-ingress
+
 spec:
   ingressClassName: alb
 
   rules:
-    - host: documents.example.com
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
